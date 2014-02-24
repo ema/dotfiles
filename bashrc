@@ -99,7 +99,7 @@ fi
 
 export GOPATH=$HOME/dev/go
 export GEM_HOME=$HOME/gems
-export PATH=$PATH:$GOPATH/bin:$GEM_HOME/bin
+export PATH=$HOME/bin:$PATH:$GOPATH/bin:$GEM_HOME/bin
 export EDITOR=/usr/bin/vim
 
 export DEBEMAIL="Emanuele Rocca <ema@debian.org>"
