@@ -1,0 +1,6 @@
+# rl: remove line from file (in place)
+# Usage: rl linenumber filename
+
+ln=$1
+shift
+sed -i "$ln d" "$@"
