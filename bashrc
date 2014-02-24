@@ -109,3 +109,5 @@ keychain > /dev/null 2>&1
 [ -z "$HOSTNAME" ] && HOSTNAME=`uname -n`
 . $HOME/.keychain/$HOSTNAME-sh 2>/dev/null
 ssh-add -l 2>/dev/null | grep -q id_rsa || ssh-add
+
+fortune
