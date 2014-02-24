@@ -1,0 +1,8 @@
+#!/bin/sh
+# git-pick: pick changed files to be committed
+
+changed=`git status -s | awk '/^(A| D| M)/ { print $2 }'`
+
+chosen=`pick $changed`
+
+[ "$chosen" ] && git commit $chosen

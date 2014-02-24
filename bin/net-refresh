@@ -1,0 +1,10 @@
+#!/bin/sh
+
+sudo service openvpn stop
+
+ping -c1 8.8.8.8 > /dev/null 2>&1 && exit
+
+sudo service networking stop
+sudo pkill -9 openvpn
+sudo service networking start
+

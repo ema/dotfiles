@@ -1,0 +1,36 @@
+# Sample minimal config file.  Copy this to ~/.offlineimaprc and edit to
+# suit to get started fast.
+
+[general]
+accounts = GMail
+fsync = false
+
+[Account GMail]
+localrepository = Local
+remoterepository = Remote
+autorefresh = 2
+quick = 10
+#maxage = 30
+
+[Repository Local]
+type = Maildir
+localfolders = ~/Mail
+
+[Repository Remote]
+type = Gmail
+
+remoteuser = emarocca@gmail.com
+remotepassfile=~/.imapsecrets
+
+realdelete = yes
+
+nametrans = lambda foldername: re.sub('^\[Gmail\]', 'Gmail', foldername).replace(' ', '_')
+
+folderfilter = lambda foldername: foldername in [ 'INBOX', 
+                                                  'debian-devel', 
+                                                  'debian-devel-announce', 
+                                                  'debian-private', 
+                                                  'debian-qa', 
+                                                  'debian-security',
+                                                  'glug', 
+                                                  '[Gmail]/Sent Mail' ]

@@ -1,0 +1,4 @@
+My personal dotfiles. All files should be under a directory like ~/dotfiles,
+and symlinked from $HOME.
+
+Take a look at mklns, modify it to fit your needs and run it.

@@ -1,0 +1,9 @@
+#!/bin/bash
+
+for file in `find . -name \*.py | grep -v contrib`
+do 
+    echo $file 
+    cp $file{,.orig}
+    /usr/share/doc/python2.7/examples/Tools/scripts/reindent.py < $file.orig > $file
+    rm $file.orig
+done

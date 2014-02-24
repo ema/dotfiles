@@ -1,0 +1,17 @@
+#!/bin/sh
+# pick: select arguments
+
+# done </dev/tty makes pick robust against:
+# pick a b c< /etc/passwd
+
+# On modern systems, read resp </dev/tty is enough.
+
+for i
+do 
+    echo -n "$i? " >/dev/tty
+    read resp </dev/tty
+    case $resp in 
+    y*) echo $i ;;
+    q*) break
+    esac
+done

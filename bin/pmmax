@@ -1,0 +1,16 @@
+#!/bin/sh
+
+ctrl_c() {
+    echo > /dev/stderr
+    awk '{ if ($1 > max) max=$1 } END { print max }' < /tmp/pmax > /dev/stderr
+    exit
+}
+
+trap ctrl_c INT
+
+while true
+do
+    pmap $1 | awk '/ total/ { gsub("K", "", $2) ; print $2 }'
+    sleep 1
+done > /tmp/pmax
+

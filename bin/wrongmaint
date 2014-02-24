@@ -1,0 +1,34 @@
+#!/bin/sh
+
+set -e
+
+if [ ! -f "debian/control" ]
+then
+    echo "E: Not in a Debian package source directory"
+    exit 1
+fi
+
+grep packages@qa.debian.org debian/control && exit 1
+
+pkg_name=$(awk '/^Source:/ { print $2; exit }' debian/control)
+
+# Change maintainer field
+sed -i s/'^Maintainer: .*'/'Maintainer: Debian QA Group <packages@qa.debian.org>'/ debian/control
+dch -q "Maintainer field set to QA Group."
+
+# policy_file='/usr/share/lintian/vendors/debian/ftp-master-auto-reject/data/standards-version/release-dates'
+policy_file='/usr/share/lintian/data/standards-version/release-dates'
+
+# Both policy versions are taken in three-digits format. Eg: 3.9.4
+last_policy=$(awk '/^[1-9]/ { print $1; exit }' $policy_file)
+pkg_policy=$(awk '/^Standards-Version:/ { print $2 }' debian/control | grep -o '^[0-9]\.[0-9]\.[0-9]')
+
+if (! dpkg --compare-versions $last_policy eq $pkg_policy )
+then
+    sed -i s/'^Standards-Version: .*'/"Standards-Version: $last_policy"/ debian/control
+    dch -a "Bump Standards-Version to $last_policy."
+fi
+
+echo "You can now run pdebuild --buildresult .."
+
+echo "Also time to check http://packages.qa.debian.org/$pkg_name"

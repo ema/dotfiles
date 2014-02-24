@@ -1,0 +1,33 @@
+#!/bin/sh
+# mklns: create symbolic links for dotfiles
+
+dfpath="${HOME}/dotfiles"
+
+what='bin 
+      .vimrc
+      .Xdefaults
+      .i3status.conf
+      .i3
+      .bashrc
+      .bash_aliases
+      .profile
+      .muttrc
+      .xinitrc
+      .offlineimaprc
+      .quiltrc-dpkg
+      .gitconfig'
+
+for i in $what
+do
+    src="${HOME}/${i}"
+    nodot=`echo $i | sed 's/^\.//'`
+    dst="${dfpath}/${nodot}"
+
+    # If $src exists and is not a symlink
+    if [ -e $src -a ! -L $src ]
+    then
+        echo "Moving $src"
+        mv $src $dst
+        ln -s $dst $src
+    fi
+done

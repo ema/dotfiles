@@ -1,0 +1,56 @@
+#!/bin/sh
+
+sudo bash
+
+DEBIAN_MIRROR='http://192.168.122.1:3142/debian/'
+
+# Choose your image OS
+OS=wheezy
+KERNEL=linux-image-3.2.0-4-amd64
+
+# Create a (sparse) 8 gig image
+dd if=/dev/null bs=1M seek=8192 of=disk.raw
+
+#Create partitions
+parted -s disk.raw mklabel msdos
+parted -s disk.raw mkpart primary 0% 100%
+parted -s disk.raw set 1 boot on
+
+# Install Master Boot Record
+install-mbr disk.raw
+
+# Mount the partitions
+modprobe dm_mod
+kpartx -av disk.raw
+# Hopefully it’s loop0p1..
+LOOPBACK_PARTITION=/dev/mapper/loop0p1
+
+# Format filesystem
+yes | mkfs.ext4 ${LOOPBACK_PARTITION}
+
+# Don’t force a check based on dates
+tune2fs -i 0 /dev/mapper/loop0p1
+
+# Mount the disk image
+mkdir mnt
+mount ${LOOPBACK_PARTITION} mnt/
+
+# Create root partition using debootstrap
+debootstrap --include=openssh-server,${KERNEL} ${OS} mnt/ ${DEBIAN_MIRROR}
+
+# Prepare for chroot
+mount -t proc proc mnt/proc/
+
+# Use chroot to fix up a few things (locales, mostly)
+chroot mnt/ apt-get update
+chroot mnt/ apt-get install locales
+chroot mnt/ locale-gen en_US.utf8
+
+chroot mnt/ /bin/bash -c "DEBIAN_FRONTEND=noninteractive dpkg-reconfigure locales"
+
+# Finishing the image
+chroot mnt/ apt-get upgrade
+chroot mnt/ apt-get clean
+
+# Remove persistent device names so that eth0 comes up as eth0
+rm mnt/etc/udev/rules.d/70-persistent-net.rules

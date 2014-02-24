@@ -1,0 +1,11 @@
+#!/bin/bash
+
+if [ ! -f "$1" ]
+then
+    echo "Usage: $0 scriptname" > /dev/stderr
+    exit 1
+fi
+
+IMAGE='ema/wheezy'
+
+docker run -a stdin -i $IMAGE /bin/bash < $1 &

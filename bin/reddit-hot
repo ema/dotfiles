@@ -1,0 +1,10 @@
+#!/bin/sh
+# reddit-hot: Get hot reddit articles
+# Usage: reddit-hot [subreddit]
+
+urls=`curl http://www.reddit.com/r/$1/hot.json?limit=100 2>/dev/null`
+
+for url in $(echo $urls | awk 'BEGIN { FS="," ; RS="url\":"} /http/ { gsub("[\" ]", "", $1) ; print $1 }')
+do
+    echo $url 
+done

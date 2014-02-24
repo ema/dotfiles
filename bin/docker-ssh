@@ -1,0 +1,9 @@
+#!/bin/sh 
+
+set -e
+
+id=$(docker run -d -p 22 emarocca/wheezy /usr/sbin/sshd -D)
+
+port=$(docker port $id 22)
+
+echo "Node $id running on port $port"

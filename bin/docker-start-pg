@@ -1,0 +1,27 @@
+#!/bin/bash
+
+# http://www.westnet.com/~gsmith/content/postgresql/pgbench-scaling.htm
+
+IMAGE="greglearns/pglite"
+
+id="$(docker run -d $IMAGE)"
+
+PASS=""
+while [ -z "$PASS" ] 
+do
+    PASS="$(docker logs $id 2>&1 | awk -F '=' '/^PG_PASSWORD/ { print $2 }')"
+done
+
+PORT="$(docker port $id 5432)"
+
+echo "localhost:$PORT:postgres:postgres:$PASS" > ~/.pgpass
+
+PGBENCH="/usr/lib/postgresql/9.1/bin/pgbench postgres -U postgres -h localhost -p $PORT"
+
+echo "PostgreSQL server listening on port $PORT."
+echo -e "Check out the following commands:\n"
+
+echo "$PGBENCH -i -F 10 -s 10"
+echo "$PGBENCH"
+
+echo "psql -U postgres -h localhost -p $PORT"

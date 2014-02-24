@@ -1,0 +1,11 @@
+#!/bin/sh
+# pmapit: execute command in the background and run pmap on it
+
+$1 &
+pid=$!
+
+while kill -0 $pid 2>/dev/null
+do
+    pmap $pid | awk '/ total/ { print $2 }'
+    sleep .5
+done

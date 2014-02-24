@@ -1,0 +1,23 @@
+#!/bin/sh
+
+apt-get update
+apt-get install -qqy git
+git clone https://github.com/openstack-dev/devstack.git
+cd devstack
+
+cat << EOF > localrc
+ADMIN_PASSWORD=password
+MYSQL_PASSWORD=password
+RABBIT_PASSWORD=password
+SERVICE_PASSWORD=password
+SERVICE_TOKEN=tokentoken
+LOGFILE=/opt/stack/logs/stack.sh.log
+SCREEN_LOGDIR=/opt/stack/logs/screen
+VERBOSE=True
+FLOATING_RANGE=192.168.122.224/27
+EOF
+
+echo dnsmasq-utils >> files/apts/nova
+echo qemu >> files/apts/nova
+
+./stack.sh
