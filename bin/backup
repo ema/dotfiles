@@ -1,0 +1,16 @@
+#!/bin/sh
+
+dst="/media/usb0/`hostname`-home-backup"
+
+if [ ! -d $dst ]
+then
+    echo "E: External disk not mounted. Exiting." > /dev/stderr
+    exit 1
+fi
+
+echo Backup started `date -R`
+
+sudo obnam force-lock --repository $dst
+sudo obnam backup --repository $dst $HOME
+
+echo Backup finished `date -R`
