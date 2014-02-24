@@ -20,3 +20,6 @@ fi
 #alias ll='ls -l'
 #alias la='ls -A'
 #alias l='ls -CF'
+
+# No way I'm gonna remember this
+alias git-serve='git instaweb'
