@@ -34,4 +34,5 @@ feh --bg-scale /home/ema/Pictures/Silicon-Graphics-SGI-Irix-Blue-HD-Wallpaper.jp
 #/usr/bin/dbus-daemon --fork --print-pid 5 --print-address 7 --session &
 #/usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1 &
 
-ck-launch-session dbus-launch --exit-with-session i3 2>&1
+#ck-launch-session 
+dbus-launch --exit-with-session i3 2>&1
