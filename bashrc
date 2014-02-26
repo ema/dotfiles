@@ -102,7 +102,11 @@ export GEM_HOME=$HOME/gems
 export PATH=$HOME/bin:$PATH:$GOPATH/bin:$GEM_HOME/bin
 export EDITOR=/usr/bin/vim
 
-export DEBEMAIL="Emanuele Rocca <ema@debian.org>"
+export NAME="Emanuele Rocca"
+export DEBEMAIL="${NAME} <ema@debian.org>"
+
+# Set the From: field in nullmailer. See nullmailer-inject(1).
+export NULLMAILER_HOST="linux.it"
 
 # ssh key
 keychain > /dev/null 2>&1
