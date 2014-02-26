@@ -1,6 +1,6 @@
 #!/bin/sh
 #
-# dmenu_path: dmenu_path-like functionality. Sorts results by atime.
+# dmenu_path: Override dmenu_path sorting results by atime.
 #
 # By default, dmenu_path sorts executables alphabetically. It seems to make
 # more sense to sort them by atime in an effort to reduce the number of
