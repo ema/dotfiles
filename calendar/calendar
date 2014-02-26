@@ -1,0 +1,4 @@
+#include "calendar.holiday"
+#include "calendar.history"
+#include "calendar.computer"
+#include "calendar.debian"

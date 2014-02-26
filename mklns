@@ -8,6 +8,7 @@ what='bin
       .Xdefaults
       .i3status.conf
       .i3
+      .calendar
       .bashrc
       .bash_aliases
       .profile
