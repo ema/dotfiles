@@ -23,3 +23,6 @@ fi
 
 # No way I'm gonna remember this
 alias git-serve='git instaweb'
+
+# Show next two months in cal's output by default
+alias cal='cal -A2'
