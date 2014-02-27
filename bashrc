@@ -105,8 +105,12 @@ export EDITOR=/usr/bin/vim
 export NAME="Emanuele Rocca"
 export DEBEMAIL="${NAME} <ema@debian.org>"
 
+APPENGINE_SDK="$HOME/dev/google_appengine"
+export PYTHONPATH="$APPENGINE_SDK:."
+
 # Set the From: field in nullmailer. See nullmailer-inject(1).
 export NULLMAILER_HOST="linux.it"
+
 
 # ssh key
 keychain > /dev/null 2>&1
