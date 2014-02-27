@@ -1,3 +1,7 @@
 #!/bin/sh
+#
+# Usage: gae-logs [ -V dev ] [ -n 0 ]
+#   -V version
+#   -n number of days
 
-../google_appengine/appcfg.py -n 0 --include_all --severity=0 request_logs . -
+../google_appengine/appcfg.py --include_all --severity=0 $@ request_logs . -
