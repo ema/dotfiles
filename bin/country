@@ -1,0 +1,4 @@
+#!/bin/sh
+# country: tells you where you are in the world 
+
+w3m -dump ddg.gg/?q=ip | awk '/^Your IP address is/ { print $NF }'
