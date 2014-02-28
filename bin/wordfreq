@@ -1,0 +1,16 @@
+#!/usr/bin/awk -f
+# wordfreq: compute word frequency
+
+{ 
+    for (i=1; i<NF; i++) {
+        gsub("[^a-zA-Z0-9]", "", $i)
+
+        if ($i)
+            words[$i]++ 
+    }
+}
+
+END { 
+    for (word in words) 
+        print words[word], word 
+}
