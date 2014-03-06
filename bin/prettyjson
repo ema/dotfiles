@@ -1,0 +1,8 @@
+#!/usr/bin/python
+# prettyjson: load JSON input and pretty print to standard output
+
+import sys
+import json
+import pprint
+
+pprint.pprint(json.loads(sys.stdin.read()))
