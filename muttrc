@@ -40,6 +40,7 @@ set index_format="%4C/%m %S %D %-20.20L %s"
 macro index M "T.*\n;WN" "Mark all messages as read"
 
 my_hdr From: Emanuele Rocca <ema@linux.it>
+my_hdr Bcc: ema@linux.it
 set use_envelope_from=yes
 
 ignore *
