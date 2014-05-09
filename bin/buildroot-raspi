@@ -12,5 +12,5 @@ test -d boot || mkdir boot
 
 echo '/dev/mmcblk0p1 /boot vfat rw,noauto 0 1' >> etc/fstab
 
-echo -e '#!/bin/sh\n\n/sbin/modprobe 8192cu && sleep 1\n/sbin/ifconfig wlan0 up' > etc/init.d/S41wireless
+printf '#!/bin/sh\n\n\n/sbin/modprobe 8192cu && sleep 1\n/sbin/ifconfig wlan0 up\nn' > etc/init.d/S41wireless
 chmod +x etc/init.d/S41wireless
