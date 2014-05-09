@@ -58,10 +58,11 @@ fi
 
 # Load autojump
 if [ -f /usr/share/autojump/autojump.sh ]; then
+    PROMPT_COMMAND='prompt_status="$? "; jobs=" ($(expr `jobs | wc -l` - 1))" ;if [[ $prompt_status == "0 " ]]; then prompt_status=; fi; if [[ $jobs == " (0)" ]]; then jobs=; fi'
   . /usr/share/autojump/autojump.sh
+else
+    PROMPT_COMMAND='prompt_status="$? "; jobs=" (`jobs | wc -l`)" ;if [[ $prompt_status == "0 " ]]; then prompt_status=; fi; if [[ $jobs == " (0)" ]]; then jobs=; fi'
 fi
-
-PROMPT_COMMAND='prompt_status="$? "; jobs=" (`jobs | wc -l`)" ;if [[ $prompt_status == "0 " ]]; then prompt_status=; fi; if [[ $jobs == " (0)" ]]; then jobs=; fi'
 
 if [ "$color_prompt" = yes ]; then
     PS1='$prompt_status${debian_chroot:+($debian_chroot)}\u@\h:\[\033[00m\]\[\033[01;34m\]\w\[\033[00m\]$jobs\n\$ '
