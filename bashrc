@@ -56,6 +56,11 @@ if [ -n "$force_color_prompt" ]; then
     fi
 fi
 
+# Load autojump
+if [ -f /usr/share/autojump/autojump.sh ]; then
+  . /usr/share/autojump/autojump.sh
+fi
+
 PROMPT_COMMAND='prompt_status="$? "; jobs=" (`jobs | wc -l`)" ;if [[ $prompt_status == "0 " ]]; then prompt_status=; fi; if [[ $jobs == " (0)" ]]; then jobs=; fi'
 
 if [ "$color_prompt" = yes ]; then
