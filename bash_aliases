@@ -26,3 +26,4 @@ alias git-serve='git instaweb'
 
 # Show next two months in cal's output by default
 alias cal='cal -A2'
+alias rxvt_white='rxvt -bg white -fg black'
