@@ -1,0 +1,8 @@
+#!/bin/sh
+# docker-purge: removes all known containers
+
+for i in `docker ps -a | awk '/[0-9a-z]/ { print $1 }'`
+do
+    docker stop $i
+    docker rm $i
+done
