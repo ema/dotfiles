@@ -27,3 +27,6 @@ alias git-serve='git instaweb'
 # Show next two months in cal's output by default
 alias cal='cal -A2'
 alias rxvt_white='rxvt -bg white -fg black'
+
+alias zssh='ssh -p 2323 -i ~/.ssh/id_rsa_zenmate'
+alias zscp='scp -P 2323 -i ~/.ssh/id_rsa_zenmate'
