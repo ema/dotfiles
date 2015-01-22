@@ -43,7 +43,7 @@ esac
 # uncomment for a colored prompt, if the terminal has the capability; turned
 # off by default to not distract the user: the focus in a terminal window
 # should be on the output of commands, not on the prompt
-#force_color_prompt=yes
+force_color_prompt=yes
 
 if [ -n "$force_color_prompt" ]; then
     if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
@@ -56,12 +56,11 @@ if [ -n "$force_color_prompt" ]; then
     fi
 fi
 
+PROMPT_COMMAND='prompt_status="$? "; jobs=" (`jobs | wc -l`)" ;if [[ $prompt_status == "0 " ]]; then prompt_status=; fi; if [[ $jobs == " (0)" ]]; then jobs=; fi'
+
 # Load autojump
 if [ -f /usr/share/autojump/autojump.sh ]; then
-    PROMPT_COMMAND='prompt_status="$? "; jobs=" ($(expr `jobs | wc -l` - 1))" ;if [[ $prompt_status == "0 " ]]; then prompt_status=; fi; if [[ $jobs == " (0)" ]]; then jobs=; fi'
   . /usr/share/autojump/autojump.sh
-else
-    PROMPT_COMMAND='prompt_status="$? "; jobs=" (`jobs | wc -l`)" ;if [[ $prompt_status == "0 " ]]; then prompt_status=; fi; if [[ $jobs == " (0)" ]]; then jobs=; fi'
 fi
 
 if [ "$color_prompt" = yes ]; then
@@ -89,6 +88,10 @@ if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
 
+if [ -f ~/.bash_secrets ]; then
+    . ~/.bash_secrets
+fi
+
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
 # sources /etc/bash.bashrc).
@@ -111,12 +114,13 @@ export EDITOR=/usr/bin/vim
 export NAME="Emanuele Rocca"
 export DEBEMAIL="${NAME} <ema@debian.org>"
 
+export GPG_KEY="D5085A0750FDB7A3"
+
 APPENGINE_SDK="$HOME/dev/google_appengine"
 export PYTHONPATH="$APPENGINE_SDK:."
 
 # Set the From: field in nullmailer. See nullmailer-inject(1).
 export NULLMAILER_HOST="linux.it"
-
 
 # ssh key
 keychain > /dev/null 2>&1
