@@ -1,2 +1,4 @@
 [user]
 	email = ema@linux.it
+[push]
+	default = matching
