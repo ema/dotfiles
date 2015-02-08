@@ -12,3 +12,6 @@ au BufRead,BufNewFile *.go set filetype=go
 
 " Projects using tabs
 au BufRead,BufNewFile /home/ema/dev/context-booster/* setl noet
+
+:highlight ExtraWhitespace ctermbg=red guibg=red
+:match ExtraWhitespace /\s\+$/
