@@ -12,6 +12,11 @@
 set $mod Mod4
 
 # Colors
+client.focused #073642 #073642 #fdf6e3 #2e9ef4
+client.focused_inactive #839496 #839496 #fdf6e3 #292d2e
+#client.unfocused #002b36 #002b36 #fdf6e3 #292d2e
+client.urgent #ff0000 #ff9999 #000000 #484e50
+
 #client.focused #000000 #000000 #FFFFFF
 #bar.focused #DA6F00 #000000 #999999
 #bar.unfocused #333333 #000000 #ffffff
@@ -144,4 +149,15 @@ bindsym $mod+r mode "resize"
 # finds out, if available)
 bar {
         status_command i3status
+
+        colors {
+            background #001014
+            statusline #839496
+            separator #073642
+            focused_workspace #839496 #839496 #002b36
+            active_workspace #002b36 #002b36 #839496
+            inactive_workspace #002b36 #002b36 #839496
+        }
 }
+
+exec --no-startup-id feh --bg-scale /usr/share/wallpapers/Lines/contents/images/1920x1080.png
