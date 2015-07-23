@@ -1,0 +1,22 @@
+#!/usr/bin/env python
+# jsoncsv: convert JSON to CSV
+
+"""
+This program expects a JSON list of dictionaries as input. It outputs the
+corresponding CSV representation.
+"""
+
+import sys
+import csv
+import json
+
+data = sys.stdin.read()
+parsed = json.loads(data)
+writer = csv.writer(sys.stdout)
+header = sorted(parsed[0].keys())
+
+writer.writerow(header)
+
+for line in parsed:
+    row = [ line[key] for key in header ]
+    writer.writerow(row)
