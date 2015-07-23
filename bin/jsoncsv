@@ -1,9 +1,14 @@
 #!/usr/bin/env python
-# jsoncsv: convert JSON to CSV
+# jsoncsv - convert JSON to CSV
+#
+# Usage: jsoncsv [fields]
 
 """
 This program expects a JSON list of dictionaries as input. It outputs the
 corresponding CSV representation.
+
+The optional 'fields' argument is a ordered, comma separated list of fields
+used to choose which columns to output. By default all fields are returned.
 """
 
 import sys
@@ -13,7 +18,11 @@ import json
 data = sys.stdin.read()
 parsed = json.loads(data)
 writer = csv.writer(sys.stdout)
-header = sorted(parsed[0].keys())
+
+if len(sys.argv) > 1:
+    header = sys.argv[1].split(',')
+else:
+    header = sorted(parsed[0].keys())
 
 writer.writerow(header)
 
