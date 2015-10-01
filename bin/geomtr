@@ -1,8 +1,9 @@
 #!/bin/sh
 # geomtr: mtr with GeoIP lookups
 
-mtr --curses -n -c 6 -r $1 | awk '$2 ~ /[0-9]/ { print $2 }' | while read ip
+mtr -n -c 6 -r $1 | awk '$2 ~ /[0-9]/ { print $2 }' | while read ip
 do
-  printf $ip
-  geoiplookup $ip | sed s/"GeoIP Country Edition:"//
+  printf "$ip "
+  geoiplookup $ip | awk -F': ' '/Country Edition/ { print $2 } /AS/ { print $2 }' | tr '\n' ' '
+  echo
 done
